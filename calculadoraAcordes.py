@@ -45,20 +45,57 @@ def recursiveCalculator(contador, nota):
         indice = arrayNuevaEscala.index(nota)
         print("----------------------------------------------")
         print("EL ACORDE DE ", arrayNuevaEscala[indice])
+        nota1 = arrayNuevaEscala[indice]
         print("Acorde # :  ", contador, "  ",  arrayNuevaEscala[indice])
         if(indice < len(arrayNuevaEscala)-1):
             notasegunda = arrayNuevaEscala[indice+1]
         else:
             notasegunda = arrayNuevaEscala[indice]
         indice = (indice+2) % len(arrayNuevaEscala)
+        nota2 = arrayNuevaEscala[indice]
         print("Acorde # :  ", contador, "  ",  arrayNuevaEscala[indice])
         indice = (indice+2) % len(arrayNuevaEscala)
+        nota3 = arrayNuevaEscala[indice]
         print("Acorde # :  ", contador, "  ",  arrayNuevaEscala[indice])
+        print("El acorde es del tipo: ", getAcorde(nota1, nota2, nota3))
         contador = contador+1
         print("-------------------------------")
         recursiveCalculator(contador, notasegunda)
     else:
         print("Fin de los acordes")
+
+
+def getDiferencia(nota1, nota2):
+    indice1 = arrayNotas.index(nota1)
+    print(indice1)
+    indice2 = arrayNotas.index(nota2)
+    print(indice2)
+    return indice2-indice1
+
+
+def getAcorde(nota1, nota2, nota3):
+    indice1 = arrayNotas.index(nota1)
+    tipoAcorde1 = ""
+    tipoAcorde2 = ""
+    if(arrayNotas[(indice1+3) % len(arrayNotas)] == nota2):
+        tipoAcorde1 = "MENOR"
+    elif(arrayNotas[(indice1+4) % len(arrayNotas)] == nota2):
+        tipoAcorde1 = "MAYOR"
+    indice2 = arrayNotas.index(nota2)
+    if(arrayNotas[(indice2+3) % len(arrayNotas)] == nota3):
+        tipoAcorde2 = "MENOR"
+    elif(arrayNotas[(indice2+4) % len(arrayNotas)] == nota3):
+        tipoAcorde2 = "MAYOR"
+
+    if(tipoAcorde1 == "MAYOR" and tipoAcorde2 == "MAYOR"):
+        return "Acorde --> AUMENTADO <--"
+    elif(tipoAcorde1 == "MENOR" and tipoAcorde2 == "MENOR"):
+        return "Acorde --> DISMINUIDO <--"
+    elif(tipoAcorde1 == "MAYOR" and tipoAcorde2 == "MENOR"):
+        return "Acorde --> MAYOR <--"
+    elif(tipoAcorde1 == "MENOR" and tipoAcorde2 == "MAYOR"):
+        return "Acorde --> MENOR <--"
+    return ""
 
 
 recursiveCalculator(1, arrayNuevaEscala[0])
