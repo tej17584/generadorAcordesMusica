@@ -12,7 +12,6 @@ arrayNotas = ["DO", "DO#", "RE", "RE#", "MI",
 
 arrayNotasv2 = ["DO", "RE", "MI",
                 "FA", "SOL", "LA", "SI"]
-gradoNumero = int(input("Ingrese el grado como un número [1,2,3,4,5,6,7]: "))
 notaBase = input("Ingrese la nota base de la nueva escala en MAYUSCULAS: ")
 
 
@@ -43,46 +42,8 @@ arrayNuevaEscala.append(arrayNotas[indice])
 print("Nota:  ", arrayNotas[indice])
 
 
-def recursiveCalculator(contador, nota):
-    if(contador <= 7):
-        indice = arrayNuevaEscala.index(nota)
-        print("----------------------------------------------")
-        print("EL ACORDE DE ", arrayNuevaEscala[indice])
-        nota1 = arrayNuevaEscala[indice]
-        print("Acorde # :  ", contador, "  ",  arrayNuevaEscala[indice])
-        if(indice < len(arrayNuevaEscala)-1):
-            notasegunda = arrayNuevaEscala[indice+1]
-        else:
-            notasegunda = arrayNuevaEscala[indice]
-        indice = (indice+2) % len(arrayNuevaEscala)
-        nota2 = arrayNuevaEscala[indice]
-        print("Acorde # :  ", contador, "  ",  arrayNuevaEscala[indice])
-        indice = (indice+2) % len(arrayNuevaEscala)
-        nota3 = arrayNuevaEscala[indice]
-        print("Acorde # :  ", contador, "  ",  arrayNuevaEscala[indice])
-        print("El acorde es del tipo: ", getAcorde(nota1, nota2, nota3))
-        contador = contador+1
-        print("-------------------------------")
-        recursiveCalculator(contador, notasegunda)
-    else:
-        print("Fin de los acordes")
-
-
 def recursiveCalculatorV2(contador, nota):
-    if(contador <= 7 and contador != gradoNumero):
-        indice = arrayNuevaEscala.index(nota)
-        nota1 = arrayNuevaEscala[indice]
-        if(indice < len(arrayNuevaEscala)-1):
-            notasegunda = arrayNuevaEscala[indice+1]
-        else:
-            notasegunda = arrayNuevaEscala[indice]
-        indice = (indice+2) % len(arrayNuevaEscala)
-        nota2 = arrayNuevaEscala[indice]
-        indice = (indice+2) % len(arrayNuevaEscala)
-        nota3 = arrayNuevaEscala[indice]
-        contador = contador+1
-        recursiveCalculatorV2(contador, notasegunda)
-    elif(contador <= 7 and contador == gradoNumero):
+    if(contador <= 7 ):
         print("ENTRADO ACA")
         indice = arrayNuevaEscala.index(nota)
         print("----------------------------------------------")
@@ -100,23 +61,14 @@ def recursiveCalculatorV2(contador, nota):
         nota3 = arrayNuevaEscala[indice]
         print("Acorde # :  ", contador, "  ",  arrayNuevaEscala[indice])
         print("El acorde es del tipo: ", getAcorde(nota1, nota2, nota3))
-        print("El acorde del grado: ", gradoNumero,
-              " es del tipo: ", getTipoGrado(gradoNumero))
+        print("El acorde del grado: ", contador,
+              " es del tipo: ", getTipoGrado(contador))
         contador = contador+1
         print("-------------------------------")
         recursiveCalculatorV2(contador, notasegunda)
     else:
         print("Fin de los acordes")
 
-
-""" 
-def getDiferencia(nota1, nota2):
-    indice1 = arrayNotas.index(nota1)
-    print(indice1)
-    indice2 = arrayNotas.index(nota2)
-    print(indice2)
-    return indice2-indice1
- """
 
 
 def getTipoGrado(numero):
@@ -153,4 +105,4 @@ def getAcorde(nota1, nota2, nota3):
     return ""
 
 
-recursiveCalculator(1, arrayNuevaEscala[0])
+recursiveCalculatorV2(1, arrayNuevaEscala[0])
